@@ -7,7 +7,7 @@
       .reduce((a, b) => a + b, bag.count)
   )({type: 'shiny gold', count: 1}) - 1
 )(
-  // Map of bags to list of list of bags with their counts
+  // Map of bags to list of bags with their counts
   Object.fromEntries(
     document.body.innerText.trim()
       .replace(/no other bag/g, '')
@@ -17,7 +17,8 @@
         bagGroup[0],
         bagGroup.slice(1).map(bagData =>
           (
-            parts => ({count: parts[0] - 0, type: parts.slice(1).join(' ')})
+            // {type: string, count: number}
+            parts => ({type: parts.slice(1).join(' '), count: parts[0] - 0})
           )(
             bagData.split(' ')
           )
