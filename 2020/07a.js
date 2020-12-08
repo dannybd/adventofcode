@@ -1,11 +1,11 @@
 (
   (bags, y) => Object.keys(bags)
-    .filter(bagToCheck => y(
-      holdsShiny => bag => bags[bag].some(
-        subbag => subbag === 'shiny gold' || holdsShiny(subbag)
-      ),
-      bagToCheck
-    ))
+    .filter(bagToCheck =>
+      y(
+        holdsShiny => bag => bags[bag]
+          .some(subbag => subbag === 'shiny gold' || holdsShiny(subbag))
+      )(bagToCheck)
+    )
     .length
 )(
   // Map of bags to list of sub bags
@@ -16,7 +16,7 @@
       .map(x => x.match(/\w+ \w+(?= bag)/g))
       .map(x => [x[0], x.slice(1)])
   ),
-  // Y combinator, allowing recursive lambda g to be called w/ initial value z
-  // Credit: http://kestas.kuliukas.com/YCombinatorExplained/
-  (g, z) => (y => y(g)(z))(le => (f => f(f))(f => le(x => (f(f))(x))))
+  // Y combinator!
+  // Credit: https://blog.klipse.tech/lambda/2016/08/10/pure-y-combinator-javascript.html
+  f => (x => x(x))(x => f(y => x(x)(y)))
 )

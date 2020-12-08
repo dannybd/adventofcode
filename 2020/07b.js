@@ -1,12 +1,11 @@
 (
   (bags, y) => y(
-      numBags => bag => bags[bag.type]
-        .map(subbag => numBags(
-          {type: subbag.type, count: subbag.count * bag.count}
-        ))
-        .reduce((a, b) => a + b, bag.count),
-      {type: 'shiny gold', count: 1}
-    ) - 1
+    numBags => bag => bags[bag.type]
+      .map(subbag =>
+        numBags({type: subbag.type, count: subbag.count * bag.count})
+      )
+      .reduce((a, b) => a + b, bag.count)
+  )({type: 'shiny gold', count: 1}) - 1
 )(
   // Map of bags to list of list of bags with their counts
   Object.fromEntries(
@@ -25,7 +24,7 @@
         )
       ])
   ),
-  // Y combinator, allowing recursive lambda g to be called w/ initial value z
-  // Credit: http://kestas.kuliukas.com/YCombinatorExplained/
-  (g, z) => (y => y(g)(z))(le => (f => f(f))(f => le(x => (f(f))(x))))
+  // Y combinator!
+  // Credit: https://blog.klipse.tech/lambda/2016/08/10/pure-y-combinator-javascript.html
+  f => (x => x(x))(x => f(y => x(x)(y)))
 )
