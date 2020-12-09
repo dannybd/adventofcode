@@ -5,7 +5,7 @@
     (brokenNum => input
       .map((_, i) =>
         input.slice(i).reduce((data, x) =>
-          data.sum >= f
+          data.sum >= brokenNum
             ? data
             : {sum: data.sum + x, list: [...data.list, x]},
           {sum: 0, list: []}
