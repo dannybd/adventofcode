@@ -37,22 +37,10 @@
                     .map(n =>
                       [...Array(numX).fill(0), ...n.toString(2)]
                         .slice(-numX)
-                        .join('')
                     )
-                    // Replace all Xs, swapping the kth X with the kth
-                    // binary digit in n.
+                    // Iteratively replace each X with a binary digit
                     .map(n =>
-                      fuzzyAddr
-                        .replace(
-                          /X/g,
-                          (_, i) =>
-                            n[
-                              fuzzyAddr
-                                .substr(0, i)
-                                .match(/X/g)
-                                ?.length | 0
-                            ]
-                        )
+                      n.reduce((addr, c) => addr.replace('X', c), fuzzyAddr)
                     )
                 )(
                   fuzzyAddr.match(/X/g)?.length || 0
