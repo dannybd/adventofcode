@@ -67,9 +67,6 @@
               )
             ),
       }),
-      {
-        mask: Array(36).fill(0).join(''),
-        mem: {}
-      }
+      {mem: {}}
     )
 )
