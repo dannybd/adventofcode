@@ -54,14 +54,17 @@
                           [ 0, -1,  1,  1], [ 0,  0,  1,  1], [ 0,  1,  1,  1],
                           [ 1, -1,  1,  1], [ 1,  0,  1,  1], [ 1,  1,  1,  1],
                         ]
-                          .map(offsets =>
+                          .filter(offsets =>
                             ((dx, dy, dz, dw) =>
-                              grid[w + dw]?.[z + dz]?.split('\n')?.[x + dx]?.[y + dy] || '?'
+                              grid[w + dw]
+                                ?.[z + dz]
+                                ?.split('\n')
+                                ?.[x + dx]
+                                ?.[y + dy]
+                                === '#'
                             )(...offsets)
                           )
-                          .join('')
-                          .match(/#/g)
-                          ?.length || 0
+                          .length
                       )
                     )
                     .join('')
