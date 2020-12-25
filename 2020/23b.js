@@ -62,23 +62,18 @@
       )
   )
 )(
-  '158937462'
-    .split('')
-    .map(n => n - 0),
+  (input =>
+    // Append (10^6 - 9) values to the given input
+    [...input, ...[...Array(1e6 + 1).keys()].slice(input.length + 1)]
+  )(
+    '158937462'
+      .split('')
+      .map(n => n - 0)
+  ),
   // rounds
-  100,
+  1e7,
   // postGame
   cupsAfterGame =>
-    // After the game, iterate through the cups, starting with 1.
-    [...Array(cupsAfterGame.length - 2)]
-      .reduce(
-        // Take the latest cup found, pass through it, and push the next cup
-        cups =>
-          cups.push(cupsAfterGame[cups.slice(-1)[0]]) && cups,
-        [1]
-      )
-      // The 0th value is 1, so strip that
-      .slice(1)
-      // Merge digits together into a string
-      .join(''),
+    // Multiply the two values after 1 to get our answer
+    cupsAfterGame[1] * cupsAfterGame[cupsAfterGame[1]],
 )
