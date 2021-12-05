@@ -18,7 +18,7 @@
       line.split(' -> ')
         .map(coord => coord.split(',').map(n => +n))
         // Sort by x1 < x2, then y1 < y2
-        .sort(([x1, y1], [x2, y2]) => x1 !== x2 ? x1 - x2 : y1 - y2),
+        .sort(([x1, y1], [x2, y2]) => x1 - x2 || y1 - y2),
     ),
   // grid
   [...Array(1000).keys()].map(_ => Array(1000).fill(0)),
