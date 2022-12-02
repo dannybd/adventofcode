@@ -1,0 +1,6 @@
+document.body.innerText.trim()
+  .split('\n\n')
+  .map(t => t.split('\n').reduce((a, b) => +b+a, 0))
+  .sort((a, b) => b - a)
+  .slice(0, 3)
+  .reduce((a, b) => a + b, 0)
